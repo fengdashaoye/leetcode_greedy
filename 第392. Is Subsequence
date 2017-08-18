@@ -1,0 +1,65 @@
+Given a string s and a string t, check if s is subsequence of t.
+
+You may assume that there is only lower case English letters in both s and t. t is 
+potentially a very long (length ~= 500,000) string, and s is a short string (<=100).
+
+A subsequence of a string is a new string which is formed from the original string by 
+deleting some (can be none) of the characters without disturbing the relative positions of the 
+remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
+
+Example 1:
+s = "abc", t = "ahbgdc"
+
+Return true.
+
+Example 2:
+s = "axc", t = "ahbgdc"
+
+Return false.
+思路:时间复杂度O(n),这是第一种思路，从头到尾，也许我可以试试两头进行。好多人的思路和我第一种思路一样
+代码:
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.equals(t)){
+            return true;
+        }
+        int start = 0;
+        for(int i = 0; i < t.length(); i++){
+            if(start < s.length() && t.charAt(i) == s.charAt(start)){
+                start++;
+            }
+            if(start == s.length()){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+}
+第二种思路:头尾向中间靠，快了一些
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.equals(t)){
+            return true;
+        }
+        int start = 0;
+        int end = s.length()-1;
+        int i = 0;
+        int j = t.length()-1;
+        while(i < j){
+            if(start < s.length() && t.charAt(i) == s.charAt(start)){
+                start++;
+            }
+            if(end >= 0 && t.charAt(j) == s.charAt(end)){
+                end--;
+            }
+            if(start > end){
+                return true;
+            }
+            i++;
+            j--;
+        }
+        return false;
+        
+    }
+}
