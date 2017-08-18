@@ -1,0 +1,2 @@
+# leetcode_greedy
+这是leetcode关于greedy的思路和代码
