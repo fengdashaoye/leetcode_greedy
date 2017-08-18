@@ -1,0 +1,38 @@
+You are climbing a stair case. It takes n steps to reach to the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Note: Given n will be a positive integer.
+其实很简单，就是斐波那契数列
+如果用递归的话，超时
+递归代码：
+class Solution {
+    public int climbStairs(int n) {
+        if(n <= 2){
+            return n;
+        }
+        return climbStairs(n-1) + climbStairs(n-2);
+        
+    }
+}
+
+迭代代码:迭代的话只针对数目就能看出来，1,2,3,5,8,13利用数字的规律，即3=1+2,5=3+2
+class Solution {
+    public int climbStairs(int n) {
+        if(n <= 2){
+            return n;
+        }
+    
+        int one_step_before = 2;
+        int two_steps_before = 1;
+        int all_ways = 0;
+        
+        for(int i=2; i<n; i++){
+    	    all_ways = one_step_before + two_steps_before;
+    	    two_steps_before = one_step_before;
+            one_step_before = all_ways;
+        }
+        return all_ways;
+        
+    }
+}
