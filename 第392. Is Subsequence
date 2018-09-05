@@ -63,3 +63,22 @@ class Solution {
         
     }
 }
+
+使用indexOf是最快的，因为其可以直接返回该字符或者字符串第一次出现的下标，而且第二个参数代表起点
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.length() > t.length()){
+            return false;
+        }
+        int start_position = 0;
+        for(int i = 0; i < s.length(); i++){
+            int result = t.indexOf(s.charAt(i), start_position);
+            if(result == -1){
+                return false;
+            }
+            start_position = result + 1;
+        }
+        return true;
+        
+    }
+}
